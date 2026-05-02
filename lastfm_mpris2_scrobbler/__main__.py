@@ -24,11 +24,11 @@ def main():
         return
 
     # load config
-    if Path(args.config_file).is_file():
+    if args.config_file is not None and Path(args.config_file).is_file():
         with open(args.config_file, "r") as file:
             config = yaml.safe_load(file)
     else:
-        raise FileNotFoundError("The specified config file " + args.config_file + " cannot be found")
+        raise FileNotFoundError(f"The specified config file '{args.config_file}' cannot be found. Please ensure that you provide a correct config file path via -c /path/to/your/config.yaml")
 
     scrobbler = Scrobbler(**config)
 
